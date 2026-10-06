@@ -12,6 +12,8 @@ and iCloud syncs the deletion to the phone.
   PhoneDrop** shortcut, and the **PhoneDrop Cleanup** scheduled task (every
   5 minutes). Re-run it after moving the repo.
 - `Send-ToPhoneDrop.ps1` copies files or folders into PhoneDrop.
+- `Send-ClipboardToPhoneDrop.ps1` (hotkey **Ctrl+Alt+P**) saves the clipboard
+  into PhoneDrop: copied files, an image as PNG, or text as `.txt`.
 - `PhoneDropCleanup.ps1` deletes items older than `-MaxAgeMinutes`.
 
 Snagit: set the capture preset's Share output to **File** (PNG, automatic
