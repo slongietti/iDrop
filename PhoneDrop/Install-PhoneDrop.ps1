@@ -18,12 +18,13 @@ New-Item -ItemType Directory -Path $Folder -Force | Out-Null
 
 $sendScript = Join-Path $PSScriptRoot 'Send-ToPhoneDrop.ps1'
 $cleanupScript = Join-Path $PSScriptRoot 'PhoneDropCleanup.ps1'
+$icon = Join-Path $PSScriptRoot 'phonedrop.ico'
 
 $sendTo = [Environment]::GetFolderPath('SendTo')
 $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $sendTo 'iCloud PhoneDrop.lnk'))
 $shortcut.TargetPath = 'powershell.exe'
 $shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$sendScript`" -Folder `"$Folder`""
-$shortcut.IconLocation = 'imageres.dll,-1023'
+$shortcut.IconLocation = $icon
 $shortcut.WindowStyle = 7
 $shortcut.Save()
 
@@ -33,7 +34,7 @@ $programs = [Environment]::GetFolderPath('Programs')
 $hotkeyShortcut = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $programs 'PhoneDrop Clipboard.lnk'))
 $hotkeyShortcut.TargetPath = 'powershell.exe'
 $hotkeyShortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$clipboardScript`" -Folder `"$Folder`""
-$hotkeyShortcut.IconLocation = 'imageres.dll,-1023'
+$hotkeyShortcut.IconLocation = $icon
 $hotkeyShortcut.WindowStyle = 7
 $hotkeyShortcut.Hotkey = $Hotkey
 $hotkeyShortcut.Save()

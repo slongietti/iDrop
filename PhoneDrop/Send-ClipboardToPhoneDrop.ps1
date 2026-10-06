@@ -12,11 +12,12 @@ param(
 
 Add-Type -AssemblyName System.Windows.Forms, System.Drawing
 
-function Show-Balloon([string] $Message, [System.Windows.Forms.ToolTipIcon] $Icon = 'Info') {
+function Show-Balloon([string] $Message) {
     $tray = New-Object System.Windows.Forms.NotifyIcon
-    $tray.Icon = [System.Drawing.SystemIcons]::Information
+    $tray.Icon = New-Object System.Drawing.Icon (Join-Path $PSScriptRoot 'phonedrop.ico')
     $tray.Visible = $true
-    $tray.ShowBalloonTip(3000, 'PhoneDrop', $Message, $Icon)
+    # ToolTipIcon None makes Windows show the tray icon (the Volare logo) in the notification.
+    $tray.ShowBalloonTip(3000, 'PhoneDrop', $Message, [System.Windows.Forms.ToolTipIcon]::None)
     Start-Sleep -Seconds 4
     $tray.Dispose()
 }
@@ -42,5 +43,5 @@ elseif ($text) {
     Show-Balloon 'Sent clipboard text to PhoneDrop.'
 }
 else {
-    Show-Balloon 'Clipboard is empty.' 'Warning'
+    Show-Balloon 'Clipboard is empty.'
 }
