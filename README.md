@@ -122,7 +122,7 @@ folder for you to send from the Files app.
 
 **Option A: add the ready-made shortcut (easiest)**
 
-1. On the iPhone, open this link: **[PhoneDrop to Photos](SHORTCUT_LINK)**
+1. On the iPhone, open this link: **[PhoneDrop to Photos](https://www.icloud.com/shortcuts/8e30d8b5c43a4fa38709cafc944e6192)**
 2. Tap **Add Shortcut**.
 3. Open the shortcut in the **Shortcuts** app and check the first action. If
    it doesn't point at your PhoneDrop folder, tap the folder name and choose
