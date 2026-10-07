@@ -199,22 +199,6 @@ it to the Home Screen: in the Shortcuts app, long-press it → **Share** →
 Pictures saved to Photos stay there until you delete them. Only the copies in
 the PhoneDrop folder are cleaned up automatically.
 
-## Optional: send every Snagit capture automatically
-
-Snagit's library saves captures in its own `.snag` format, which an iPhone
-can't open. To also save a PNG of every capture into PhoneDrop:
-
-1. Open the Snagit **Capture** window and choose the **Image** (or
-   **All-in-One**) tab.
-2. Set **Share** to **File**.
-3. Open **Share → Properties** and set:
-   - **File format:** PNG
-   - **File name:** Automatic file name
-   - **Folder:** `C:\Users\<you>\iCloudDrive\PhoneDrop` (untick **Use last folder**)
-
-Snagit keeps its library copy as well. Snagit can only send to one output
-folder, so PhoneDrop takes that slot.
-
 ## Troubleshooting
 
 | Problem | Fix |
