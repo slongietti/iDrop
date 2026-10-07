@@ -4,8 +4,9 @@
 .DESCRIPTION
     Target of the Explorer "Send to > iCloud PhoneDrop" shortcut.
 #>
+[CmdletBinding(PositionalBinding = $false)]
 param(
-    [Parameter(ValueFromRemainingArguments)]
+    [Parameter(Position = 0, ValueFromRemainingArguments)]
     [string[]] $Path,
     [string] $Folder = (Join-Path $env:USERPROFILE 'iCloudDrive\PhoneDrop')
 )
