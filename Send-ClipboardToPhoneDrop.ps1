@@ -19,8 +19,12 @@ function Show-Toast([string] $Message) {
     [void][Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
     [void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
 
+    $logo = [Uri]::new((Join-Path $PSScriptRoot 'phonedrop.png')).AbsoluteUri
+    $text = [Security.SecurityElement]::Escape($Message)
+
+    # The registered IconUri doesn't reliably reach the toast header, so the logo also goes in the body.
     $xml = New-Object Windows.Data.Xml.Dom.XmlDocument
-    $xml.LoadXml("<toast><visual><binding template='ToastGeneric'><text>$([Security.SecurityElement]::Escape($Message))</text></binding></visual></toast>")
+    $xml.LoadXml("<toast><visual><binding template='ToastGeneric'><text>PhoneDrop</text><text>$text</text><image placement='appLogoOverride' hint-crop='circle' src='$logo'/></binding></visual></toast>")
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show(
         [Windows.UI.Notifications.ToastNotification]::new($xml))
 }
