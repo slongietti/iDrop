@@ -3,8 +3,8 @@
     Saves the clipboard contents into the PhoneDrop folder.
 .DESCRIPTION
     Target of the PhoneDrop hotkey. Copied files are copied over, an image is
-    saved as a PNG, and text is saved as a .txt file. Shows a tray balloon
-    with the result.
+    saved as a PNG, and text is saved as a .txt file. Shows a Windows
+    notification with the result.
 #>
 param(
     [string] $Folder = (Join-Path $env:USERPROFILE 'iCloudDrive\PhoneDrop')
@@ -12,14 +12,17 @@ param(
 
 Add-Type -AssemblyName System.Windows.Forms, System.Drawing
 
-function Show-Balloon([string] $Message) {
-    $tray = New-Object System.Windows.Forms.NotifyIcon
-    $tray.Icon = New-Object System.Drawing.Icon (Join-Path $PSScriptRoot 'phonedrop.ico')
-    $tray.Visible = $true
-    # ToolTipIcon None makes Windows show the tray icon (the Volare logo) in the notification.
-    $tray.ShowBalloonTip(3000, 'PhoneDrop', $Message, [System.Windows.Forms.ToolTipIcon]::None)
-    Start-Sleep -Seconds 4
-    $tray.Dispose()
+# Registered by Install-PhoneDrop.ps1 so the toast shows "PhoneDrop" and the Volare icon.
+$AppId = 'Volare.PhoneDrop'
+
+function Show-Toast([string] $Message) {
+    [void][Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+    [void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+
+    $xml = New-Object Windows.Data.Xml.Dom.XmlDocument
+    $xml.LoadXml("<toast><visual><binding template='ToastGeneric'><text>$([Security.SecurityElement]::Escape($Message))</text></binding></visual></toast>")
+    [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show(
+        [Windows.UI.Notifications.ToastNotification]::new($xml))
 }
 
 New-Item -ItemType Directory -Path $Folder -Force | Out-Null
@@ -31,17 +34,17 @@ $text = Get-Clipboard -Format Text -Raw
 
 if ($files) {
     & (Join-Path $PSScriptRoot 'Send-ToPhoneDrop.ps1') -Folder $Folder -Path $files.FullName
-    Show-Balloon "Sent $($files.Count) item(s) to PhoneDrop."
+    Show-Toast "Sent $($files.Count) item(s) to PhoneDrop."
 }
 elseif ($image) {
     $image.Save((Join-Path $Folder "Clipboard $stamp.png"), [System.Drawing.Imaging.ImageFormat]::Png)
     $image.Dispose()
-    Show-Balloon 'Sent clipboard image to PhoneDrop.'
+    Show-Toast 'Sent clipboard image to PhoneDrop.'
 }
 elseif ($text) {
     Set-Content -LiteralPath (Join-Path $Folder "Clipboard $stamp.txt") -Value $text -Encoding UTF8
-    Show-Balloon 'Sent clipboard text to PhoneDrop.'
+    Show-Toast 'Sent clipboard text to PhoneDrop.'
 }
 else {
-    Show-Balloon 'Clipboard is empty.'
+    Show-Toast 'Clipboard is empty.'
 }

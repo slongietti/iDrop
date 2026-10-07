@@ -39,6 +39,12 @@ $hotkeyShortcut.WindowStyle = 7
 $hotkeyShortcut.Hotkey = $Hotkey
 $hotkeyShortcut.Save()
 
+# Gives Send-ClipboardToPhoneDrop's toasts their own name and icon instead of PowerShell's.
+$appIdKey = 'HKCU:\Software\Classes\AppUserModelId\Volare.PhoneDrop'
+New-Item -Path $appIdKey -Force | Out-Null
+Set-ItemProperty -Path $appIdKey -Name DisplayName -Value 'PhoneDrop'
+Set-ItemProperty -Path $appIdKey -Name IconUri -Value (Join-Path $PSScriptRoot 'phonedrop.png')
+
 # conhost --headless keeps the task from flashing a console window every run.
 $action = New-ScheduledTaskAction -Execute 'conhost.exe' `
     -Argument "--headless powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$cleanupScript`" -Folder `"$Folder`" -MaxAgeMinutes $MaxAgeMinutes"
