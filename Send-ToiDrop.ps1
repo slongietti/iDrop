@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-    Copies files or folders into the PhoneDrop folder.
+    Copies files or folders into the iDrop folder.
 .DESCRIPTION
-    Target of the Explorer "Send to > iCloud PhoneDrop" shortcut.
+    Target of the Explorer "Send to > iDrop" shortcut.
 #>
 [CmdletBinding(PositionalBinding = $false)]
 param(
     [Parameter(Position = 0, ValueFromRemainingArguments)]
     [string[]] $Path,
-    [string] $Folder = (Join-Path $env:USERPROFILE 'iCloudDrive\PhoneDrop')
+    [string] $Folder = (Join-Path $env:USERPROFILE 'iCloudDrive\iDrop')
 )
 
 New-Item -ItemType Directory -Path $Folder -Force | Out-Null

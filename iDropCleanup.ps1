@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-    Deletes items in the PhoneDrop folder older than the given age.
+    Deletes items in the iDrop folder older than the given age.
 .DESCRIPTION
-    Runs from the "PhoneDrop Cleanup" scheduled task. iCloud syncs the
+    Runs from the "iDrop Cleanup" scheduled task. iCloud syncs the
     deletions, so the files also disappear from the iPhone.
 #>
 param(
-    [string] $Folder = (Join-Path $env:USERPROFILE 'iCloudDrive\PhoneDrop'),
+    [string] $Folder = (Join-Path $env:USERPROFILE 'iCloudDrive\iDrop'),
     [int] $MaxAgeMinutes = 15
 )
 
