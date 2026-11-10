@@ -12,8 +12,7 @@ iMessage: + → Photos → it's the newest picture
 ```
 
 The iDrop folder is a holding area, not storage: anything in it is deleted
-after 15 minutes, and the iPhone shortcut clears out images once it has saved
-them to Photos.
+after 15 minutes by a cleanup task on the PC.
 
 ## What you need
 
@@ -116,9 +115,11 @@ Open **Photos** → **Albums** → **+** → **New Album** and name it `iDrop`.
 
 ### 3. Add the "iDrop to Photos" shortcut
 
-The shortcut copies every image in iDrop into the iDrop album, then
-deletes those images from the folder. Other files (PDFs, text) stay in the
-folder for you to send from the Files app.
+The shortcut copies every image in iDrop into the iDrop album. It leaves the
+files in the folder; the PC's cleanup task removes them after 15 minutes.
+Other files (PDFs, text) stay in the folder for you to send from the Files app.
+Running the shortcut again before the cleanup saves the same images a second
+time.
 
 **Option A: add the ready-made shortcut (easiest)**
 
@@ -132,7 +133,7 @@ folder for you to send from the Files app.
 **Option B: build it yourself**
 
 In the **Shortcuts** app, tap **+** and rename the shortcut
-**iDrop to Photos**. Then add these four actions in order (use the search
+**iDrop to Photos**. Then add these three actions in order (use the search
 box under **Add Action**):
 
 1. **Get Contents of Folder**: tap **Folder** → **iCloud Drive** →
@@ -142,13 +143,6 @@ box under **Add Action**):
    - Add three more filters: **File Extension is** `jpg`, `jpeg`, and `heic`.
    - Above the filters, change **All** to **Any**.
 3. **Save to Photo Album**: tap **Recents** and choose **iDrop**.
-4. **Delete Files**:
-   - It fills in **Saved Photo Media** on its own. **Change it.** Left as is,
-     it points at the copies you just saved to Photos.
-   - Tap **Saved Photo Media** → **Clear**, then tap the empty field →
-     **Select Variable** → tap the **Files** output of **Filter Files**.
-   - Turn **Delete Immediately** on, so cleared files don't pile up in
-     Files → Recently Deleted for 30 days.
 
 The finished shortcut reads:
 
@@ -156,7 +150,6 @@ The finished shortcut reads:
 Get Contents of Folder   iDrop
 Filter Files             Any of: File Extension is png / jpg / jpeg / heic
 Save to Photo Album      iDrop
-Delete Files             Files (from Filter Files), Delete Immediately on
 ```
 
 ### 4. Run it once
