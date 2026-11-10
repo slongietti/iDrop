@@ -113,43 +113,49 @@ powershell -ExecutionPolicy Bypass -File C:\iDrop\Install-iDrop.ps1 -MaxAgeMinut
 
 Open **Photos** → **Albums** → **+** → **New Album** and name it `iDrop`.
 
-### 3. Add the "iDrop to Photos" shortcut
+### 3. Add the "iDrop" shortcut
 
-The shortcut copies every image in iDrop into the iDrop album. It leaves the
-files in the folder; the PC's cleanup task removes them after 15 minutes.
-Other files (PDFs, text) stay in the folder for you to send from the Files app.
-Running the shortcut again before the cleanup saves the same images a second
-time.
+The shortcut takes every PNG and JPEG in iDrop, converts it to PNG, saves it
+to the iDrop album, and opens it in Photos. It leaves the files in the folder;
+the PC's cleanup task removes them after 15 minutes. Other files (PDFs, text)
+stay in the folder for you to send from the Files app. Running the shortcut
+again before the cleanup saves the same images a second time.
 
 **Option A: add the ready-made shortcut (easiest)**
 
-1. On the iPhone, open this link: **[iDrop to Photos](https://www.icloud.com/shortcuts/ca8f4ca55245459abb9397e8276b5ca6)**
+1. On the iPhone, open this link: **[iDrop](https://www.icloud.com/shortcuts/ca8f4ca55245459abb9397e8276b5ca6)**
 2. Tap **Add Shortcut**.
 3. Open the shortcut in the **Shortcuts** app and check the first action. If
    it doesn't point at your iDrop folder, tap the folder name and choose
    **iCloud Drive → iDrop**.
-4. Check that the **Save to Photo Album** action is set to **iDrop**.
+4. The **Save to Photo Album** action may point at a different album. Tap the
+   album name and choose **iDrop**.
 
 **Option B: build it yourself**
 
 In the **Shortcuts** app, tap **+** and rename the shortcut
-**iDrop to Photos**. Then add these three actions in order (use the search
+**iDrop**. Then add these five actions in order (use the search
 box under **Add Action**):
 
 1. **Get Contents of Folder**: tap **Folder** → **iCloud Drive** →
    **iDrop** → **Open**.
 2. **Filter Files**:
    - Tap **Add Filter** and set it to **File Extension** · **is** · `png`.
-   - Add three more filters: **File Extension is** `jpg`, `jpeg`, and `heic`.
+   - Add two more filters: **File Extension is** `jpg` and `jpeg`.
    - Above the filters, change **All** to **Any**.
-3. **Save to Photo Album**: tap **Recents** and choose **iDrop**.
+3. **Convert Image**: set the format to **PNG**. It takes the **Files** from
+   **Filter Files** on its own.
+4. **Save to Photo Album**: tap **Recents** and choose **iDrop**.
+5. **Open in Photos**: it takes the **Saved Photo Media** on its own.
 
 The finished shortcut reads:
 
 ```
 Get Contents of Folder   iDrop
-Filter Files             Any of: File Extension is png / jpg / jpeg / heic
-Save to Photo Album      iDrop
+Filter Files             Any of: File Extension is png / jpg / jpeg
+Convert Image            Files to PNG
+Save to Photo Album      Converted Image to iDrop
+Open in Photos           Saved Photo Media
 ```
 
 ### 4. Run it once
@@ -162,7 +168,7 @@ prompt.
 
 1. Open **Settings** → **Accessibility** → **Touch** → **Back Tap**.
 2. Choose **Double Tap** (or **Triple Tap**).
-3. Scroll down to the **Shortcuts** section and pick **iDrop to Photos**.
+3. Scroll down to the **Shortcuts** section and pick **iDrop**.
 
 Double-tapping the back of the phone now runs the shortcut. You can also add
 it to the Home Screen: in the Shortcuts app, long-press it → **Share** →
@@ -184,8 +190,9 @@ it to the Home Screen: in the Shortcuts app, long-press it → **Share** →
 
 **Use it on the iPhone**
 
-- **Pictures:** double-tap the back of the phone, then in iMessage tap **+** →
-  **Photos**. The picture is the newest one.
+- **Pictures:** double-tap the back of the phone. The picture opens in Photos;
+  tap **Share** → **Messages**, or in iMessage tap **+** → **Photos** and pick
+  the newest picture.
 - **Other files:** Files → iDrop → long-press the file → **Share** →
   **Messages**, or **Copy** and paste it into the message.
 
