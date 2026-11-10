@@ -122,7 +122,7 @@ folder for you to send from the Files app.
 
 **Option A: add the ready-made shortcut (easiest)**
 
-1. On the iPhone, open this link: **[iDrop to Photos](SHORTCUT_LINK)**
+1. On the iPhone, open this link: **[iDrop to Photos](https://www.icloud.com/shortcuts/ca8f4ca55245459abb9397e8276b5ca6)**
 2. Tap **Add Shortcut**.
 3. Open the shortcut in the **Shortcuts** app and check the first action. If
    it doesn't point at your iDrop folder, tap the folder name and choose
